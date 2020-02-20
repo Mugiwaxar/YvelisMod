@@ -1,0 +1,10 @@
+{
+	"name": "Yvelis_Mod",
+	"version": "0.0.1",
+	"title": "Yvelis Mod",
+	"author": "Mugiwaxar",
+	"dependencies": ["base >= 0.18"],
+	"description": "A mod created for the Yvelis Server",
+	"factorio_version": "0.18",
+	"homepage":"https://github.com/Mugiwaxar/YvelisMod"
+}

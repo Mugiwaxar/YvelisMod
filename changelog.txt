@@ -1,0 +1,9 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.0.1
+Date: 20/02/2020
+  Major Features:
+    - Initial release
+  Features:
+    - Increased all Players reach distance to 99999
+    - Increased all Players Inventory size to 200
+    - Create a new Force for each Player
