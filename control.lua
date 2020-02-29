@@ -1,17 +1,36 @@
+GUI = {}
+
 if script.active_mods["debugadapter"] then require('__debugadapter__/debugadapter.lua') end
 require("utils/functions.lua")
 require("scripts/objects/YVPlayer.lua")
+require("scripts/objects/YVTeam.lua")
+require("scripts/gui/gui.lua")
+require("scripts/game-update.lua")
 
 -- When the Mod initialize --
 function onInit()
     global.playersTable = {}
+    global.teamTable = {}
 end
 
 -- When a save is loaded --
 function onLoad()
-    -- Set YVPlayer Metatable --
-    for k, yvplayer in  pairs(global.playersTable or {}) do
+    -- Set YVPlayer Metatables --
+    for k, yvplayer in pairs(global.playersTable or {}) do
         YVP:rebuild(yvplayer)
+    end
+    -- Set YVTeam Metatables --
+    for k, yvteam in pairs(global.teamTable or {}) do
+        YVT:rebuild(yvteam)
+    end
+end
+
+function onConfigurationChanged()
+    -- Update all Variables --
+	updateValues()
+    -- Update all GUIs --
+    for k, player in pairs(game.players) do
+        GUI.createAllGui(player)
     end
 end
 
@@ -41,10 +60,20 @@ function initPlayer(event)
 
     -- Save the Player inside the Players Table --
     global.playersTable[player.name] = YVP:new(player)
+
+    -- Create the YVTeam --
+    YVT.newTeamObj(player)
 end
 
 ----------------------------- Events -----------------------------
 script.on_init(onInit)
 script.on_load(onLoad)
+script.on_configuration_changed(onConfigurationChanged)
 script.on_event(defines.events.on_player_created, initPlayer)
 script.on_event(defines.events.on_player_joined_game, initPlayer)
+script.on_event(defines.events.on_tick, onTick)
+script.on_event(defines.events.on_gui_click, GUI.buttonClicked)
+script.on_event(defines.events.on_gui_elem_changed, GUI.onGuiElemChanged)
+script.on_event(defines.events.on_gui_checked_state_changed, GUI.onGuiElemChanged)
+script.on_event(defines.events.on_gui_selection_state_changed, GUI.onGuiElemChanged)
+script.on_event(defines.events.on_gui_text_changed, GUI.onGuiElemChanged)
