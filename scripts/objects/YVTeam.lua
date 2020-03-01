@@ -147,6 +147,11 @@ function YVT:isInPeace(YVTeam)
     return self.leader.ent.force.get_cease_fire(YVTeam.leader.ent.force)
 end
 
+-- Return the friend statue --
+function YVT:isFriends(YVTeam)
+    return self.leader.ent.force.get_friend(YVTeam.leader.ent.force)
+end
+
 -- Return if the Player is the Lead of the Team --
 function YVT:isLeader(Player)
     if Player == self.leader.ent then return true end

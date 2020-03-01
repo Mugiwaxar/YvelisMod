@@ -152,6 +152,22 @@ function GUI.onGuiElemChanged(event)
 		return
 	end
 
+	-- Team friend --
+	if string.match(event.element.name, "TGUIFriendCheckBox") then
+		local playerName = string.gsub(event.element.name, "TGUIFriendCheckBox", "")
+		local YVTeam1 = YVT.getYVTeamP(player)
+		local YVTeam2 = YVT.getYVTeamPN(playerName)
+		if YVTeam1:isLeader(player) then
+			YVTeam1.leader.ent.force.set_friend(YVTeam2.name, event.element.state)
+			if event.element.state == true then
+				game.print({"gui-description.NowFriends", YVTeam1.name, YVTeam2.name})
+			else
+				game.print({"gui-description.NotNowFriends", YVTeam1.name, YVTeam2.name})
+			end
+		end
+		return
+	end
+
 	-- Team peace or war --
 	if string.match(event.element.name, "TGUIWarCheckBox") then
 		local playerName = string.gsub(event.element.name, "TGUIWarCheckBox", "")
@@ -161,6 +177,7 @@ function GUI.onGuiElemChanged(event)
 			YVTeam1.leader.ent.force.set_cease_fire(YVTeam2.leader.ent.force, not event.element.state)
 			if event.element.state == true then
 				game.print({"gui-description.WarTo", YVTeam1.name, YVTeam2.name})
+				YVTeam1.leader.ent.force.set_friend(YVTeam2.name, false)
 			else
 				game.print({"gui-description.PeaceTo", YVTeam1.name, YVTeam2.name})
 			end

@@ -54,7 +54,7 @@ function GUI.createTeamGui(player)
     local myTeamLabel = TGUIFirstFlow.add{type="label", name="myTeamLabel", caption={ "", "[color=blue]" .. YVT.getYVTeamP(player).name .. "[/color]", ": "}, tooltip={"gui-description.MyTeamTT"}}
 
     -- Create the Team Info Button --
-    local teamInfoButton = TGUIFirstFlow.add{type="button", name="teamInfoButton" .. YVT.getYVTeamP(player).name, caption={"gui-description.Infos"}, tooltip={"gui-description.InfosTT"}}
+    local teamInfoButton = TGUIFirstFlow.add{type="button", name="teamInfoButton" .. player.name, caption={"gui-description.Infos"}, tooltip={"gui-description.InfosTT"}}
 
     -- Create the Create Team Button --
     local createTeamButton = TGUIFirstFlow.add{type="button", name="createTeamButton", caption={"gui-description.CreateTeam"}, tooltip={"gui-description.CreateTeamTT"}}
@@ -99,8 +99,9 @@ function createPlayerLine(gui, player, currentPlayer)
         local playerFlow = gui.add{type="flow", name="TGUIplayerFlow" .. player.name, direction="horizontal"}
         local playerLabel = playerFlow.add{type="label", name="TGUPlayerLabel" .. player.name, caption=playerName, tooltip=connectStatue}
         local teamLabel = playerFlow.add{type="label", name="TGUIteamLabel" .. player.name, caption="[color=blue]" ..player.force.name .. "[/color]", tooltip={"", {"gui-description.Leader"}, ": ", YVTeam2.leader.name}}
-        local peaceCheckBox = playerFlow.add{type="checkbox", name="TGUIWarCheckBox" .. player.name, caption={"gui-description.War"}, tooltip={"gui-description.WarTT"}, state=not YVTeam:isInPeace(YVTeam2)}
-        local infoButton = playerFlow.add{type="button", name="teamInfoButton" .. YVT.getYVTeamP(player).name, caption={"gui-description.Infos"}, tooltip={"gui-description.InfosTT"}}
+        local friendCheckBox = playerFlow.add{type="checkbox", name="TGUIFriendCheckBox" .. player.name, caption={"gui-description.Friend"}, tooltip={"gui-description.FriendTT"}, state=YVTeam:isFriends(YVTeam2), enabled=YVTeam:isLeader(currentPlayer)}
+        local warCheckBox = playerFlow.add{type="checkbox", name="TGUIWarCheckBox" .. player.name, caption={"gui-description.War"}, tooltip={"gui-description.WarTT"}, state=not YVTeam:isInPeace(YVTeam2), enabled=YVTeam:isLeader(currentPlayer)}
+        local infoButton = playerFlow.add{type="button", name="teamInfoButton" .. player.name, caption={"gui-description.Infos"}, tooltip={"gui-description.InfosTT"}}
     end
 end
 

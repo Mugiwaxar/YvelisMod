@@ -62,7 +62,7 @@ function initPlayer(event)
     global.playersTable[player.name] = YVP:new(player)
 
     -- Create the YVTeam --
-    YVT.newTeamObj(player)
+    YVT.newTeamObj(global.playersTable[player.name])
 end
 
 ----------------------------- Events -----------------------------
