@@ -90,8 +90,7 @@ function GUI.buttonClicked(event)
 	if string.match(event.element.name, "TGUIChangeTeamNameButton") then
 		local YVTeam = YVT.getYVTeamP(player)
 		if YVTeam:isLeader(player) then
-			game.print({"gui-description.ChangedTeamName", YVTeam.name, player.gui.screen.TeamInfoGUI.CTNFlow.CTNTextfield.text})
-			YVTeam:changeName(player.gui.screen.TeamInfoGUI.CTNFlow.CTNTextfield.text)
+			if YVTeam:changeName(player.gui.screen.TeamInfoGUI.CTNFlow.CTNTextfield.text) == true then game.print({"gui-description.ChangedTeamName", YVTeam.name, player.gui.screen.TeamInfoGUI.CTNFlow.CTNTextfield.text}) end
 		end
 		return
 	end

@@ -47,10 +47,10 @@ function GUI.createTeamGui(player)
     -- Create the first flow --
     local TGUIFirstFlow = TeamGUI.add{type="flow", name="TGUIFirstFlow", direction="horizontal"}
 
-    -- Create the My Name Label--
+    -- Create the My Name Label --
     local myNameLabel = TGUIFirstFlow.add{type="label", name="myNameLabel", caption={ "", "[color=green]" .. player.name .. "[/color]", ": "}, tooltip={"gui-description.MyNameTT"}}
 
-    -- Create the My Team Label--
+    -- Create the My Team Label --
     local myTeamLabel = TGUIFirstFlow.add{type="label", name="myTeamLabel", caption={ "", "[color=blue]" .. YVT.getYVTeamP(player).name .. "[/color]", ": "}, tooltip={"gui-description.MyTeamTT"}}
 
     -- Create the Team Info Button --

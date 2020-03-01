@@ -108,12 +108,13 @@ end
 function YVT:changeName(newName)
     if game.forces[newName] ~= nil then
         self.leader.ent.print({"gui-description.FNameUsed"})
-        return
+        return false
     end
     local player = self.leader.ent
     local newForce = game.create_force(newName)
     YVT.mergeForces(player.force, newForce)
     YVT.getYVTeamP(player).name = newName
+    return true
 end
 
 -- Change a Player Team --
