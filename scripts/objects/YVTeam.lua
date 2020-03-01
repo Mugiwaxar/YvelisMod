@@ -92,6 +92,18 @@ function YVT.removeYVTeam(YVTeamName)
     end
 end
 
+-- Merge two Forces --
+function YVT.mergeForces(oldForce, newForce)
+    for k, force in pairs(game.forces) do
+        newForce.set_cease_fire(force, oldForce.get_cease_fire(force))
+        force.set_cease_fire(newForce, force.get_cease_fire(oldForce))
+    end
+    for k, tech in pairs(oldForce.technologies) do
+        newForce.technologies[tech.name].researched = tech.researched
+    end
+    game.merge_forces(oldForce, newForce)
+end
+
 -- Change the Team name --
 function YVT:changeName(newName)
     if game.forces[newName] ~= nil then
@@ -100,14 +112,7 @@ function YVT:changeName(newName)
     end
     local player = self.leader.ent
     local newForce = game.create_force(newName)
-    for k, force in pairs(game.forces) do
-        newForce.set_cease_fire(force, player.force.get_cease_fire(force))
-        force.set_cease_fire(newForce, force.get_cease_fire(player.force))
-    end
-    for k, tech in pairs(player.force.technologies) do
-        newForce.technologies[tech.name].researched = true
-    end
-    game.merge_forces(player.force, newForce)
+    YVT.mergeForces(player.force, newForce)
     YVT.getYVTeamP(player).name = newName
 end
 
@@ -125,9 +130,10 @@ end
 
 -- Remove a Player from the Team --
 function YVT:removePlayer(YVPlayer, newForce)
-    if self.YVPlayersTable[YVPlayer.name].name == self.leader.name then
-        if table_size(self.YVPlayersTable) <= 1 then
-            game.merge_forces(YVPlayer.ent.force, newForce.name)
+    self.YVPlayersTable[YVPlayer.name] = nil
+    if YVPlayer.name == self.leader.name then
+        if table_size(self.YVPlayersTable) <= 0 then
+            YVT.mergeForces(YVPlayer.ent.force, newForce)
             YVT.removeYVTeam(self)
         else
             for k, YVPlayer2 in pairs(self.YVPlayersTable) do
@@ -136,7 +142,6 @@ function YVT:removePlayer(YVPlayer, newForce)
             end
         end
     end
-    self.YVPlayersTable[YVPlayer.name] = nil
 end
 
 -- Make peace with an other Team --
