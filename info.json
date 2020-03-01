@@ -1,6 +1,6 @@
 {
 	"name": "Yvelis_Mod",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"title": "Yvelis Mod",
 	"author": "Mugiwaxar",
 	"dependencies": ["base >= 0.18"],

@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.3
+Date: 01/02/2020
+  Scripting:
+    - Added some init Players checks
+  Bugfixes:
+    - No more "Name Changed" message if a Team name is already taken
+    - Tech tree is no longer cleaned when joining another Team
+---------------------------------------------------------------------------------------------------
 Version: 0.0.2
 Date: 29/02/2020
   Major Features:

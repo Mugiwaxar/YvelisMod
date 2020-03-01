@@ -99,7 +99,9 @@ function YVT.mergeForces(oldForce, newForce)
         force.set_cease_fire(newForce, force.get_cease_fire(oldForce))
     end
     for k, tech in pairs(oldForce.technologies) do
-        newForce.technologies[tech.name].researched = tech.researched
+        if tech.researched == true then
+            newForce.technologies[tech.name].researched = true
+        end
     end
     game.merge_forces(oldForce, newForce)
 end
