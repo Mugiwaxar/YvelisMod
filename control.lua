@@ -11,6 +11,9 @@ require("scripts/game-update.lua")
 function onInit()
     global.playersTable = {}
     global.teamTable = {}
+    for k, player in pairs(game.players) do
+        initPlayer({player_index=player.index})
+    end
 end
 
 -- When a save is loaded --
@@ -30,6 +33,7 @@ function onConfigurationChanged()
 	updateValues()
     -- Update all GUIs --
     for k, player in pairs(game.players) do
+        if global.playersTable[player.name] == nil then initPlayer({player_index=player.index}) end
         GUI.createAllGui(player)
     end
 end
@@ -63,6 +67,9 @@ function initPlayer(event)
 
     -- Create the YVTeam --
     YVT.newTeamObj(global.playersTable[player.name])
+
+    -- Create all GUI --
+    GUI.createAllGui(player)
 end
 
 ----------------------------- Events -----------------------------
