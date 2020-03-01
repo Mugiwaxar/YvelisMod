@@ -10,7 +10,7 @@ function YVP:new(player)
 	local t = {}
 	local mt = {}
 	setmetatable(t, mt)
-    mt.__index = MF
+    mt.__index = YVP
     t.ent = player
     t.name = player.name
 	return t
@@ -20,6 +20,6 @@ end
 function YVP:rebuild(object)
 	if object == nil then return end
 	local mt = {}
-	mt.__index = MF
+	mt.__index = YVP
 	setmetatable(object, mt)
 end

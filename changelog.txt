@@ -1,4 +1,23 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.3
+Date: 01/02/2020
+  Scripting:
+    - Added some init Players checks
+  Bugfixes:
+    - No more "Name Changed" message if a Team name is already taken
+    - Tech tree is no longer cleaned when joining another Team
+---------------------------------------------------------------------------------------------------
+Version: 0.0.2
+Date: 29/02/2020
+  Major Features:
+    - Teams Update
+    - You can join or create a Team
+    - If you are the Leader, you can rename your Team, be friend or declar War to others Teams
+    - If you create a new Team or join a Team, you will loose everything that belong to you (Structures, Technologies) except if your are the last member
+  Features:
+    - Added the Server GUI that show online Players and allow you to open the Teams GUI
+    - Added the Teams GUI, show informations about Teams and allow to manage his own team (Or create a new one)
+---------------------------------------------------------------------------------------------------
 Version: 0.0.1
 Date: 20/02/2020
   Major Features:
