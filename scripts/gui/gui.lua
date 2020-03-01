@@ -116,9 +116,10 @@ function GUI.buttonClicked(event)
 
 	-- Team Join Button --
 	if string.match(event.element.name, "TGUIjoinButton") then
-		local playerName = string.gsub(event.element.name, "TGUIjoinButton", "")
+		local teamName = string.gsub(event.element.name, "TGUIjoinButton", "")
 		local YVTeam1 = YVT.getYVTeamP(player)
-		local YVTeam2 = YVT.getYVTeamPN(playerName)
+		local YVTeam2 = YVT.getYVTeamFN(teamName)
+		player.gui.screen.TeamInfoGUI.destroy()
 		if YVTeam2.allowJoin == true then
 			YVT.transferPlayer(global.playersTable[player.name], YVTeam1, YVTeam2)
 			game.print({"gui-description.JoinedTeam", player.name, YVTeam2.name})
@@ -161,6 +162,7 @@ function GUI.onGuiElemChanged(event)
 			YVTeam1.leader.ent.force.set_friend(YVTeam2.name, event.element.state)
 			if event.element.state == true then
 				game.print({"gui-description.NowFriends", YVTeam1.name, YVTeam2.name})
+				YVTeam1.leader.ent.force.set_cease_fire(YVTeam2.leader.ent.force, true)
 			else
 				game.print({"gui-description.NotNowFriends", YVTeam1.name, YVTeam2.name})
 			end

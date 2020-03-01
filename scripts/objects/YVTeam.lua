@@ -75,6 +75,13 @@ function YVT.getYVTeamF(force)
         end
     end
 end
+function YVT.getYVTeamFN(forceName)
+    for k, yvteam in pairs(global.teamTable) do
+        if forceName == yvteam.name then
+            return yvteam
+        end
+    end
+end
 
 -- Remove an YVTeam --
 function YVT.removeYVTeam(YVTeamName)
